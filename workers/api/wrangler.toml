@@ -1,0 +1,49 @@
+# Cloudflare Workers 設定檔
+# 文件：https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "debate-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+
+# Node.js 相容性（LangChain 需要）
+compatibility_flags = ["nodejs_compat"]
+
+# 開發設定
+[dev]
+port = 8787
+local_protocol = "http"
+
+# 環境變數（非機密資料）
+[vars]
+ENV = "development"
+
+# === Secrets（機密資料，用 wrangler secret put 設定）===
+# 使用指令設定：
+# wrangler secret put GROQ_API_KEY
+# wrangler secret put OPENROUTER_API_KEY
+
+# === Cloudflare KV（Phase 3 才需要）===
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "your_kv_namespace_id"
+
+# === Cloudflare D1（Phase 3 才需要）===
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "debate-db"
+# database_id = "your_database_id"
+
+# === Durable Objects（進階功能才需要）===
+# [[durable_objects.bindings]]
+# name = "DEBATE_STATE"
+# class_name = "DebateState"
+# script_name = "debate-api"
+
+# === 限制設定 ===
+# Workers 預設限制：
+# - CPU time: 30 秒（可設定到 300,000 ms）
+# - Memory: 128 MB（無法調整）
+# - Script size: 3 MB (free) / 10 MB (paid)
+
+[limits]
+cpu_ms = 300000  # 5 分鐘（辯論可能需要較長時間）

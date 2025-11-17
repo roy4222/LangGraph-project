@@ -1,0 +1,6 @@
+# Workers 本地開發環境變數
+# 複製此檔案為 .dev.vars 並填入實際值
+# wrangler dev 會自動載入 .dev.vars
+
+GROQ_API_KEY=gsk_xxxxxxxxxxxxx
+OPENROUTER_API_KEY=sk-or-xxxxxxxxxxxxx

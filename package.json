@@ -4,9 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "npm run dev & npm run dev:worker",
+    "dev:worker": "cd workers/api && npm run dev",
     "build": "next build",
+    "build:all": "npm run build && npm run build:worker",
+    "build:worker": "cd workers/api && npm run build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "npm run build && wrangler pages deploy .next",
+    "deploy:worker": "cd workers/api && npm run deploy"
   },
   "dependencies": {
     "next": "16.0.3",
